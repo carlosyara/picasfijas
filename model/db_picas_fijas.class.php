@@ -5,7 +5,7 @@ class PicasFijas extends Db
   
   public function __construct()
   {
-    parent::init('localhost','root','','picas_fijas');	
+    parent::init('localhost','root','1qazxsw2','picas_fijas');	
   }
 
   public function crear_cuenta($user, $mail, $password)
