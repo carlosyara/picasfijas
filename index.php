@@ -13,7 +13,7 @@ require_once('model/db_picas_fijas.class.php');
 class WebService
 {
   /**
-   * 
+   * Test github.
    */
   public static function crear_cuenta() {
     $picasFijas         = new PicasFijas();
@@ -50,7 +50,7 @@ class WebService
     $output['status']   = true;
     $output['data']     = $picasFijas->validate_code($user, $code);
 
-    Flight::json($output); 
+    Flight::json($output);
   }
   public static function delete_active_game(){
     $picasFijas         = new PicasFijas();
@@ -60,7 +60,7 @@ class WebService
     $output['status']   = true;
     $output['data']     = $picasFijas->delete_active_game($user);
 
-    Flight::json($output); 
+    Flight::json($output);
   }
 
 }
