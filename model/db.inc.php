@@ -3,6 +3,15 @@ class Db
 {
     private $conex;
 
+    /**
+     * Terrible code on this implementation.
+     *
+     * @param [type] $host
+     * @param [type] $user
+     * @param [type] $pass
+     * @param [type] $schema
+     * @return void
+     */
     public function init($host,$user,$pass,$schema)
     {
             $this->conex = new mysqli($host,$user,$pass,$schema);
@@ -20,12 +29,12 @@ class Db
         $result = $this->exeQuery($query);
 
         $items = array();
-        
+
         while($row = $result->fetch_assoc())
         {
             $keys           = array_keys($row);
             $current_row    = array();
-            
+
             foreach($keys as $key)
             {
                 $current_row[$key] = $row[$key];
@@ -114,7 +123,7 @@ class Db
             $output = implode(' AND ', $output);
 
             $output = ' WHERE '.$output;
-            
+
         }
         else
         {
@@ -127,9 +136,9 @@ class Db
     private function setJoins($joins)
     {
         $output = array();
-        
+
         $condition_enable = array('>','<','<=','=','>=','LIKE','<>');
-        
+
         foreach ($joins as $key => $join)
         {
             if(!empty($join['table']) && !empty($join['field_left']) && !is_null($join['condition']) && !empty($join['field_rigth']))
@@ -140,21 +149,21 @@ class Db
                     {
                         $join['field_left'] = $join['field_left'];
                     }
-                    
+
                     if(!is_numeric($join['field_rigth']))
                     {
                         if($join['condition'] != 'IN')
                         {
-                            $join['field_rigth'] = $join['field_rigth'];    
+                            $join['field_rigth'] = $join['field_rigth'];
                         }
-                        
+
                     }
 
                     $output[] = ' INNER JOIN '.$join['table'].' ON '.$join['field_left'].' '.$join['condition'].' '.$join['field_rigth'].' ';
                 }
             }
         }
-        
+
         if(count($output) > 0)
         {
             $output = implode(' ', $output);
@@ -172,6 +181,6 @@ class Db
         $result = $this->conex->query($query);
         return $result;
     }
-        
+
 }
 ?>
